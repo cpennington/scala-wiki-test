@@ -1,0 +1,3 @@
+start helloworld w/ cd helloworld; mvn jetty:run
+
+Run on a diffnt port w/ mvn jetty:run -Djetty.port=<port>
