@@ -24,9 +24,12 @@ class Boot {
     Schemifier.schemify(true, Log.infoF _, User)
 
     // Build SiteMap
-    val entries = Menu(Loc("Home", List("index"), "Home")) :: User.sitemap
+    val entries = List(Menu(Loc("Home", List("index"), "Home")),
+		       Menu(Loc("Wiki", List("wiki") -> true, "Wiki")),
+		       Menu(Loc("WikiBackend", List("wiki_backend"), "Wiki Backend"))
+		     ) ::: User.sitemap
     LiftRules.setSiteMap(SiteMap(entries:_*))
-
+    
     /*
      * Show the spinny image when an Ajax call starts
      */
@@ -40,6 +43,12 @@ class Boot {
       Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
 
     LiftRules.early.append(makeUtf8)
+
+    LiftRules.rewrite.append {
+      case RewriteRequest(
+	ParsePath(List("wiki", _*),_,_,_),_,_) =>
+	  RewriteResponse(List("wiki_backend"))
+    }
 
     S.addAround(DB.buildLoanWrapper)
   }
