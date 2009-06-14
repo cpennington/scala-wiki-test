@@ -46,8 +46,8 @@ class Boot {
 
     LiftRules.rewrite.append {
       case RewriteRequest(
-	ParsePath(List("wiki", _*),_,_,_),_,_) =>
-	  RewriteResponse(List("wiki_backend"))
+	ParsePath(List("wiki", path @ _*),_,_,_),_,_) =>
+	  RewriteResponse(List("wiki_backend"), Map("wiki_path" -> path.mkString("", "/", "")))
     }
 
     S.addAround(DB.buildLoanWrapper)
