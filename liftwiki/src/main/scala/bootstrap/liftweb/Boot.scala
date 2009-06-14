@@ -21,7 +21,7 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("com.liftwiki")
-    Schemifier.schemify(true, Log.infoF _, User)
+    Schemifier.schemify(true, Log.infoF _, User, Page)
 
     // Build SiteMap
     val entries = List(Menu(Loc("Home", List("index"), "Home")),
