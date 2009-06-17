@@ -1,6 +1,12 @@
 <lift:surround with="default" at="content">
-  <lift:PageDisplay>
-    <head><title><page:title/></title></head>
-    <page:body/>
+  <lift:PageDisplay form="post">
+    <choose:display>
+      <head><title><page:title/></title></head>
+      <page:body/>
+    </choose:display>
+    <choose:create>
+      <head><title>Create a New Page</title></head>
+      <page:form />
+    </choose:create>
   </lift:PageDisplay>
 </lift:surround>
