@@ -9,6 +9,7 @@ import Helpers._
 import _root_.scala.xml._
 import com.liftwiki.model._
 import _root_.net.liftweb.mapper._
+import _root_.com.petebevin.markdown._
 
 
 class PageDisplay {
@@ -20,9 +21,10 @@ class PageDisplay {
 	val editForm = existingPage.toForm(Full("Save"), {
 	  _.path(path).save
 	})
+	val body = Unparsed(new MarkdownProcessor().markdown(existingPage.body))
 	bind("page", chooseTemplate("choose", "display", contents),
 	     "title" -> existingPage.title,
-	     "body" -> SHtml.swappable(<div>{existingPage.body}</div>,
+	     "body" -> SHtml.swappable(<div>{body}</div>,
 				       <div>{bind("page", chooseTemplate("choose", "create", contents),
 					    "form" -> editForm)}</div>
 				     )
