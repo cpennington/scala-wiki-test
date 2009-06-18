@@ -25,9 +25,9 @@ class Page extends LongKeyedMapper[Page] with IdPK {
       S.fmapFunc({s: List[String] => this.setFromAny(s)}){funcName =>
 	Full(<textarea name={funcName}
 	     rows={textareaRows.toString}
-	     cols={textareaCols.toString} id={fieldId}>{is.toString}</textarea>)}
+	     cols={textareaCols.toString} id={fieldId}>{this.toString}</textarea>)}
     }
-    
+
     def textareaRows  = 8
     
     def textareaCols = 20
