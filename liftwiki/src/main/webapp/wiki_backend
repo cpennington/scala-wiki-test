@@ -2,7 +2,12 @@
   <lift:PageDisplay form="post">
     <choose:display>
       <head><title><page:title/></title></head>
-      <page:body/>
+      <h1>
+	<page:title/>
+      </h1>
+      <div>
+	<page:body/>
+      </div>
     </choose:display>
     <choose:create>
       <head><title>Create a New Page</title></head>

@@ -7,30 +7,14 @@ import _root_.scala.xml._
 import S._
 
 object Page extends Page with LongKeyedMetaMapper[Page] {
-  override def fieldOrder = List(title, body)
+
 }
 
 class Page extends LongKeyedMapper[Page] with IdPK {
   def getSingleton = Page // what's the "meta" server
   
-  object path extends MappedString(this, 200) {
+  object path extends MappedString(this, 200) with UniqueIndexed {
     override def dbDisplay_? = false
-  }
-  object title extends MappedString(this, 200)
-  object body extends MappedText(this) {
-    /**
-     * Create an input field for the item
-     */
-    override def _toForm: Box[NodeSeq] = {
-      S.fmapFunc({s: List[String] => this.setFromAny(s)}){funcName =>
-	Full(<textarea name={funcName}
-	     rows={textareaRows.toString}
-	     cols={textareaCols.toString} id={fieldId}>{this.toString}</textarea>)}
-    }
-
-    def textareaRows  = 8
-    
-    def textareaCols = 20
   }
 
 }

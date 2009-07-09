@@ -21,14 +21,14 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("com.liftwiki")
-    Schemifier.schemify(true, Log.infoF _, User, Page)
+    Schemifier.schemify(true, Log.infoF _, User, Page, Version)
 
     // Build SiteMap
     val entries = List(Menu(Loc("Home", List("index"), "Home")),
 		       Menu(Loc("Wiki", List("wiki") -> true, "Wiki")),
 		       Menu(Loc("WikiBackend", List("wiki_backend"), "Wiki Backend", Hidden))
 		     ) ::: User.sitemap
-    LiftRules.setSiteMap(SiteMap(entries:_*))
+    LiftRules.setSiteMap(SiteMap(Nil, entries:_*))
     
     /*
      * Show the spinny image when an Ajax call starts
